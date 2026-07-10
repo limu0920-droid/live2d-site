@@ -12,6 +12,10 @@
   ];
   const CUBISM_MEMORY_BYTES = 128 * 1024 * 1024;
   const HIDDEN_DRAWABLE_IDS = new Set(['ArtMesh312']);
+  const OFF_EXPRESSION_PARAMETERS = [
+    'Param33', 'Param34', 'Param46', 'Param51', 'Param52', 'Param53', 'Param62',
+    'Param65', 'Param66', 'Param67', 'Param69', 'Param71', 'Param72', 'Param73'
+  ];
   const CLOSED_MOUTH_PARAMETERS = [
     ['ParamMouthForm', 0],
     ['ParamMouthOpenY', 0],
@@ -66,12 +70,13 @@
     const coreModel = model.internalModel?.coreModel;
     if (!coreModel) return;
 
+    const cubismId = getCubismId(id);
     if (
       typeof coreModel.getParameterIndex === 'function' &&
       typeof coreModel.getParameterCount === 'function' &&
       typeof coreModel.setParameterValueByIndex === 'function'
     ) {
-      const index = coreModel.getParameterIndex(id);
+      const index = coreModel.getParameterIndex(cubismId);
       if (index >= 0 && index < coreModel.getParameterCount()) {
         coreModel.setParameterValueByIndex(index, value);
         return;
@@ -79,20 +84,13 @@
     }
 
     if (typeof coreModel.setParameterValueById === 'function') {
-      coreModel.setParameterValueById(id, value);
-      return;
-    }
-
-    if (typeof coreModel.getParameterIndex === 'function' && typeof coreModel.setParameterValueByIndex === 'function') {
-      const cubismId = getCubismId(id);
-      const index = coreModel.getParameterIndex(cubismId);
-      if (index >= 0) coreModel.setParameterValueByIndex(index, value);
+      coreModel.setParameterValueById(cubismId, value);
     }
   }
 
   function applyModelDefaults(model) {
+    for (const id of OFF_EXPRESSION_PARAMETERS) setModelParameter(model, id, 0);
     setModelParameter(model, 'Param75', 1);
-    setModelParameter(model, 'Param52', 0);
     applyClosedMouth(model);
   }
 
