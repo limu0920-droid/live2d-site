@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1800" viewBox="0 0 1400 1800" role="img" aria-label="hero placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d7c4cf"/>
+      <stop offset="0.5" stop-color="#e9dccb"/>
+      <stop offset="1" stop-color="#cbb6c2"/>
+    </linearGradient>
+    <radialGradient id="light" cx="50%" cy="38%" r="55%">
+      <stop offset="0" stop-color="#fff8ec" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#9b1f1f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1400" height="1800" fill="url(#bg)"/>
+  <rect width="1400" height="1800" fill="url(#light)"/>
+  <circle cx="700" cy="760" r="220" fill="none" stroke="#9b1f1f" stroke-opacity="0.18" stroke-width="3"/>
+  <path d="M700 530c120 90 180 210 180 360 0 175-80 310-180 420-100-110-180-245-180-420 0-150 60-270 180-360Z" fill="#fdfaf4" fill-opacity="0.34" stroke="#9b1f1f" stroke-opacity="0.22" stroke-width="3"/>
+  <text x="700" y="1510" text-anchor="middle" font-family="serif" font-size="58" fill="#1a1410" fill-opacity="0.5" letter-spacing="12">MIRA STUDIO</text>
+</svg>

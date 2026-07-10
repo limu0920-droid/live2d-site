@@ -1,0 +1,7 @@
+.claude/
+.browser-*/
+live2d-debug-current.png
+tmp-*.js
+*.log
+.DS_Store
+Thumbs.db

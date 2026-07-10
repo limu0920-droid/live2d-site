@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>岚烟Faileas · 个人作品展示</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--zhu:#9B1F1F;--gold:#B8945A;--gold2:#D4AF72;--ink:#1A1410;--muted:#6B5F52;--faint:#A09080;--paper:#FDFAF4;--paper2:#F5F0E5;--paper3:#EDE7D8;--fs:'Noto Serif SC',serif;--fn:'Noto Sans SC',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{font-family:var(--fn);color:var(--ink);background:var(--paper);overflow-x:hidden;cursor:auto;-webkit-font-smoothing:antialiased;}a{color:inherit;text-decoration:none;}::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--paper);}::-webkit-scrollbar-thumb{background:var(--zhu);}
+#cur{display:none;position:fixed;pointer-events:none;z-index:9999;}#cur-dot{width:7px;height:7px;background:var(--zhu);border-radius:50%;transform:translate(-50%,-50%);position:fixed;}#cur-ring{width:34px;height:34px;border:1.5px solid rgba(155,31,31,.35);border-radius:50%;position:fixed;transform:translate(-50%,-50%);transition:all .18s ease;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 52px;height:62px;background:rgba(253,250,244,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(155,31,31,.08);}.nav-logo{font-family:var(--fs);font-size:15px;letter-spacing:.18em;display:flex;align-items:center;gap:10px;}.logo-seal{width:26px;height:26px;border:1.5px solid var(--zhu);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--zhu);}.nav-links{display:flex;gap:32px;list-style:none;}.nav-links a{font-size:12px;letter-spacing:.1em;color:var(--muted);transition:color .2s;position:relative;}.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--zhu);transition:width .28s;}.nav-links a:hover,.nav-links a.active{color:var(--zhu);}.nav-links a.active::after,.nav-links a:hover::after{width:100%;}.nav-cta{justify-self:end;font-size:11px;letter-spacing:.12em;padding:7px 18px;border:1.5px solid rgba(26,20,16,.18);color:var(--muted);cursor:auto;transition:all .22s;}.nav-cta:hover{border-color:var(--zhu);color:var(--zhu);}
+.hero{min-height:100svh;padding:92px 30px 32px;display:grid;grid-template-columns:330px 1fr;gap:34px;border-bottom:1px solid rgba(26,20,16,.08);}.hero-info{display:flex;flex-direction:column;justify-content:center;padding-left:22px;}.hero-kicker{font-size:9px;letter-spacing:.2em;color:var(--zhu);margin-bottom:18px;display:flex;gap:10px;align-items:center;}.hero-kicker::before{content:'';width:28px;height:1px;background:var(--zhu);}.hero-brand{font-family:var(--fs);font-size:44px;font-weight:900;letter-spacing:.08em;line-height:1.05;margin-bottom:10px;}.hero-meta{font-size:10px;letter-spacing:.18em;color:var(--faint);margin-bottom:28px;}.hero-copy{font-size:13px;line-height:2;color:var(--muted);font-weight:300;margin-bottom:26px;}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px;}.hero-tags span{font-size:9px;letter-spacing:.12em;color:var(--zhu);border:1px solid rgba(155,31,31,.14);padding:5px 10px;background:rgba(155,31,31,.025);}.hero-list{margin-top:auto;border-top:1px solid rgba(26,20,16,.08);}.hero-list a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(26,20,16,.08);font-size:12px;color:var(--muted);letter-spacing:.06em;transition:color .2s;}.hero-list a:hover{color:var(--zhu);}.hero-stage{position:relative;min-height:calc(100svh - 124px);background:linear-gradient(135deg,#D7C4CF,#CBB6C2);overflow:hidden;display:flex;align-items:center;justify-content:center;}.hero-stage>img,.hero-stage>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}.hero-live2d{background:radial-gradient(circle at 54% 44%,rgba(253,250,244,.54),rgba(253,250,244,0) 32%),linear-gradient(135deg,#D7C4CF,#CBB6C2 52%,#B99EAD);}.hero-live2d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;opacity:0;transition:opacity .35s ease;}.hero-live2d[data-state="ready"] canvas{opacity:1;}.hero-stage::before,.hero-stage::after{content:'';position:absolute;width:14px;height:14px;border-color:rgba(253,250,244,.55);z-index:2;}.hero-stage::before{left:18px;top:18px;border-left:1px solid;border-top:1px solid;}.hero-stage::after{right:18px;bottom:18px;border-right:1px solid;border-bottom:1px solid;}.stage-title{position:absolute;top:13%;left:13%;font-family:var(--fs);font-size:18px;font-weight:600;letter-spacing:.06em;z-index:1;}.stage-sub{font-size:10px;letter-spacing:.18em;color:rgba(253,250,244,.78);z-index:1;text-shadow:0 1px 10px rgba(0,0,0,.28);pointer-events:none;}.stage-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--zhu);box-shadow:0 0 0 22px rgba(155,31,31,.08),0 0 0 23px rgba(155,31,31,.35);}.stage-nav{position:absolute;left:14px;right:14px;top:50%;display:flex;justify-content:space-between;color:rgba(253,250,244,.55);font-size:20px;z-index:1;pointer-events:none;}.stage-pager{position:absolute;bottom:34px;display:flex;gap:8px;align-items:center;z-index:1;pointer-events:none;}.stage-pager span{width:3px;height:3px;background:rgba(253,250,244,.6);border-radius:50%;}.stage-pager .on{width:16px;border-radius:1px;background:var(--zhu);}.live2d-status{position:absolute;left:50%;bottom:28px;z-index:3;transform:translateX(-50%);padding:7px 12px;background:rgba(253,250,244,.82);border:1px solid rgba(155,31,31,.12);color:var(--muted);font-size:10px;letter-spacing:.08em;text-align:center;white-space:nowrap;}
+.section{padding:64px 52px;border-bottom:1px solid rgba(26,20,16,.08);}.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;}.eyebrow{font-size:9px;letter-spacing:.2em;color:var(--zhu);margin-bottom:10px;}.sec-title{font-family:var(--fs);font-size:28px;font-weight:900;letter-spacing:.08em;}.sec-copy{max-width:360px;font-size:11px;line-height:1.8;color:var(--muted);text-align:right;}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}.work-card{background:var(--paper2);min-height:360px;display:flex;flex-direction:column;transition:.28s;}.work-card:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(26,20,16,.08);}.work-thumb{height:210px;background:var(--paper3);overflow:hidden;}.work-thumb img,.work-thumb video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);}.work-card:hover .work-thumb img,.work-card:hover .work-thumb video{transform:scale(1.03);}.w1{background:linear-gradient(135deg,#DDD5C5,#C8BFB0);}.w2{background:linear-gradient(135deg,#C5CFDD,#B0BCC8);}.w3{background:linear-gradient(135deg,#D5D0C5,#C8C0B0);}.work-body{padding:20px;border-top:1px solid rgba(26,20,16,.05);}.work-tag{font-size:9px;letter-spacing:.14em;color:var(--gold);margin-bottom:8px;}.work-name{font-family:var(--fs);font-size:18px;font-weight:600;margin-bottom:10px;}.work-meta{font-size:11px;color:var(--faint);line-height:1.8;}.work-line{margin-top:18px;padding-top:14px;border-top:1px solid rgba(26,20,16,.07);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(26,20,16,.07);}.price{min-height:200px;padding:28px;border-right:1px solid rgba(26,20,16,.07);background:rgba(245,240,229,.72);}.price:last-child{border-right:0;}.price-icon{font-family:var(--fs);font-size:30px;color:rgba(155,31,31,.12);margin-bottom:14px;}.price h3{font-size:14px;margin-bottom:10px;}.money{font-family:var(--fs);font-size:18px;color:var(--zhu);font-weight:900;margin-bottom:16px;}.price ul{list-style:none;font-size:11px;line-height:2;color:var(--muted);}.price li::before{content:'— ';color:var(--gold);}
+.rules-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(26,20,16,.07);}.rule{min-height:150px;padding:26px;border-right:1px solid rgba(26,20,16,.07);border-bottom:1px solid rgba(26,20,16,.07);}.rule:nth-child(3n){border-right:0;}.rule-no{font-family:var(--fs);font-size:34px;color:rgba(155,31,31,.08);margin-bottom:10px;}.rule h3{font-size:13px;margin-bottom:10px;}.rule p{font-size:11px;line-height:1.8;color:var(--muted);}
+.commission{padding:76px 52px 52px;display:grid;grid-template-columns:1fr 1.25fr;gap:70px;background:#FCF8EF;}.com-title{font-family:var(--fs);font-size:54px;font-weight:900;line-height:.98;letter-spacing:.06em;}.com-title span{color:var(--zhu);}.com-sub{margin-top:20px;font-size:12px;color:var(--muted);line-height:1.8;}.com-links{margin-top:34px;border-top:1px solid rgba(26,20,16,.08);}.com-links a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(26,20,16,.08);font-size:12px;color:var(--muted);}.com-panel{align-self:start;border-top:2px solid var(--zhu);background:var(--paper);}.com-row{display:grid;grid-template-columns:160px 1fr;padding:22px;border-bottom:1px solid rgba(26,20,16,.08);}.com-label{font-size:10px;letter-spacing:.16em;color:var(--faint);}.com-text{font-size:13px;line-height:1.8;}.btn{display:inline-flex;align-items:center;justify-content:center;margin:22px;min-width:150px;height:40px;background:var(--zhu);color:var(--paper);font-size:11px;letter-spacing:.12em;cursor:auto;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}.reveal.in{opacity:1;transform:translateY(0);}footer{display:flex;justify-content:space-between;padding:20px 52px;font-size:10px;letter-spacing:.1em;color:var(--faint);}.foot-logo{font-family:var(--fs);font-size:13px;color:var(--ink);letter-spacing:.14em;}
+@media(max-width:900px){body{cursor:auto;}#cur{display:none;}.nav{display:flex;padding:12px 20px;height:auto;gap:18px;align-items:flex-start;}.nav-links{gap:14px;flex-wrap:wrap;}.nav-cta{display:none;}.hero,.commission{grid-template-columns:1fr;padding:92px 22px 28px;}.hero-info{padding-left:0;}.hero-stage{min-height:58vh;}.works-grid,.price-grid,.rules-grid{grid-template-columns:1fr;}.price,.rule{border-right:0;}.sec-head{display:block;}.sec-copy{text-align:left;margin-top:14px;}.section{padding:52px 22px;}footer{padding:20px 22px;display:block;line-height:2;}}
+.hero-live2d[data-state="ready"] .stage-sub{display:none;}
+@media(max-width:640px){
+  html{-webkit-text-size-adjust:100%;}
+  .nav{padding:10px 16px 9px;display:flex;flex-wrap:wrap;gap:9px;align-items:center;}
+  .nav-logo{width:100%;min-width:0;font-size:14px;letter-spacing:.12em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .logo-seal{width:24px;height:24px;flex:0 0 auto;}
+  .nav-links{width:100%;gap:18px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links li{flex:0 0 auto;}
+  .nav-links a{font-size:11px;white-space:nowrap;}
+  .hero{min-height:auto;padding:112px 14px 30px;display:flex;flex-direction:column;gap:22px;}
+  .hero-stage{order:-1;width:100%;height:clamp(390px,58svh,560px);min-height:0;}
+  .hero-info{padding-left:0;}
+  .hero-kicker{font-size:8px;letter-spacing:.16em;margin-bottom:14px;}
+  .hero-kicker::before{width:20px;}
+  .hero-brand{font-size:clamp(32px,10vw,42px);letter-spacing:.04em;}
+  .hero-meta{margin-bottom:18px;line-height:1.6;}
+  .hero-copy{font-size:12px;line-height:1.85;margin-bottom:20px;}
+  .hero-tags{gap:7px;margin-bottom:24px;}
+  .hero-tags span{padding:5px 8px;}
+  .hero-list a{padding:13px 0;}
+  .stage-nav,.stage-pager{display:none;}
+  .stage-title{font-size:15px;top:10%;left:9%;}
+  .live2d-status{max-width:calc(100% - 32px);white-space:normal;line-height:1.5;}
+  .section{padding:44px 16px;}
+  .sec-head{margin-bottom:24px;}
+  .sec-title{font-size:24px;line-height:1.2;}
+  .sec-copy{max-width:none;font-size:11px;line-height:1.75;}
+  .works-grid{gap:14px;}
+  .work-card{min-height:0;}
+  .work-thumb{height:auto;aspect-ratio:16/10;}
+  .work-body{padding:17px 16px;}
+  .work-name{font-size:16px;line-height:1.45;}
+  .price-grid,.rules-grid{border-left:0;border-right:0;}
+  .price{min-height:0;padding:22px 18px;border-bottom:1px solid rgba(26,20,16,.07);}
+  .rule{min-height:0;padding:22px 18px;}
+  .rule:nth-child(3n){border-right:0;}
+  .commission{padding:48px 16px 34px;grid-template-columns:1fr;gap:30px;}
+  .com-title{font-size:clamp(36px,12vw,48px);}
+  .com-sub{font-size:12px;}
+  .com-row{grid-template-columns:1fr;gap:8px;padding:18px 16px;}
+  .btn{width:calc(100% - 32px);margin:18px 16px;}
+  footer{padding:18px 16px;}
+}
+@media(max-width:380px){
+  .nav{padding-left:12px;padding-right:12px;}
+  .hero{padding-left:12px;padding-right:12px;}
+  .hero-stage{height:clamp(360px,56svh,500px);}
+  .section,.commission{padding-left:12px;padding-right:12px;}
+  .hero-brand{font-size:30px;}
+}
+</style>
+</head>
+<body>
+<div id="cur"><div id="cur-dot"></div><div id="cur-ring"></div></div>
+<nav class="nav"><div class="nav-logo"><div class="logo-seal">岚</div>岚烟Faileas</div><ul class="nav-links"><li><a href="index.html" class="active">首页</a></li><li><a href="works.html">作品视频</a></li><li><a href="links.html">视频合集</a></li><li><a href="#commission">联系</a></li></ul><a href="#commission" class="nav-cta">联系入口</a></nav>
+<header class="hero">
+  <aside class="hero-info reveal"><p class="hero-kicker">岚烟Faileas · Portfolio</p><h1 class="hero-brand">岚烟Faileas</h1><p class="hero-meta">个人作品展示 · 视频档案</p><p class="hero-copy">这里收纳岚烟Faileas的个人作品视频、展示片段与后续更新内容。访问者可以快速查看作品页，也可以在视频合集里直接打开完整视频。</p><div class="hero-tags"><span>Portfolio</span><span>Artwork</span><span>Video</span><span>Archive</span></div><div class="hero-list"><a href="works.html">精选作品 <span>→</span></a><a href="links.html">视频合集 <span>→</span></a><a href="#commission">联系信息 <span>→</span></a></div></aside>
+  <div class="hero-stage hero-live2d reveal" data-live2d-root aria-label="罐装神明 Live2D 模型展示"><canvas aria-hidden="true"></canvas><p class="live2d-status" data-live2d-status>Live2D 脚本启动中</p><p class="stage-title"></p><p class="stage-sub">Portfolio · Live2D · Personal Works</p><div class="stage-nav"><span>‹</span><span>›</span></div><div class="stage-pager"><span></span><span></span><span class="on"></span></div></div>
+</header>
+<section class="section reveal"><div class="sec-head"><div><p class="eyebrow">00 · 作品示例</p><h2 class="sec-title">最近展示</h2></div><p class="sec-copy">精选的本地视频入口，点击后进入作品页查看完整播放。</p></div><div class="works-grid"><a class="work-card" href="works.html"><div class="work-thumb w1"><video muted playsinline preload="metadata"><source src="assets/videos/lanyan-faileas-01.mp4" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 01</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a><a class="work-card" href="works.html"><div class="work-thumb w2"><video muted playsinline preload="metadata"><source src="assets/videos/lanyan-faileas-02.mp4" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 02</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a><a class="work-card" href="links.html"><div class="work-thumb w3"><video muted playsinline preload="metadata"><source src="assets/videos/lanyan-faileas-03.mp4" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">视频合集</p><h3 class="work-name">岚烟Faileas · 视频合集</h3><p class="work-meta">Local video · archive</p><div class="work-line"><span>查看合集</span><span>→</span></div></div></a></div></section>
+<section class="section reveal" id="service"><div class="sec-head"><div><p class="eyebrow">01 · 展示内容</p><h2 class="sec-title">展示内容</h2></div><p class="sec-copy">用于介绍作品类型和内容方向，可按客户资料继续补充。</p></div><div class="price-grid"><div class="price"><p class="price-icon">壹</p><h3>作品视频</h3><p class="money">Video</p><ul><li>本地视频播放</li><li>作品页弹窗展示</li><li>合集页原片入口</li></ul></div><div class="price"><p class="price-icon">贰</p><h3>作品档案</h3><p class="money">Archive</p><ul><li>按作品顺序整理</li><li>保留标题与说明</li><li>后续可继续追加</li></ul></div><div class="price"><p class="price-icon">叁</p><h3>个人主页</h3><p class="money">Profile</p><ul><li>展示客户名称</li><li>统一视觉风格</li><li>承接作品入口</li></ul></div><div class="price"><p class="price-icon">肆</p><h3>联系方式</h3><p class="money">Contact</p><ul><li>可放社交主页</li><li>可放邮箱或平台链接</li><li>上线前按真实信息替换</li></ul></div></div></section>
+<section class="section reveal"><div class="sec-head"><div><p class="eyebrow">02 · 浏览说明</p><h2 class="sec-title">浏览说明</h2></div><p class="sec-copy">这里说明作品展示和后续更新方式。</p></div><div class="rules-grid"><div class="rule"><p class="rule-no">一</p><h3>作品页播放</h3><p>进入作品视频页后，点击卡片即可打开全屏播放器。</p></div><div class="rule"><p class="rule-no">二</p><h3>合集页入口</h3><p>视频合集页保留每个本地视频的直接访问入口。</p></div><div class="rule"><p class="rule-no">三</p><h3>封面素材</h3><p>当前封面仍可继续替换为客户正式作品图。</p></div><div class="rule"><p class="rule-no">四</p><h3>文件维护</h3><p>新增视频时放入 assets/videos 并同步添加页面卡片。</p></div><div class="rule"><p class="rule-no">五</p><h3>部署方式</h3><p>这是纯静态页面，可直接部署到静态托管平台。</p></div><div class="rule"><p class="rule-no">六</p><h3>后续更新</h3><p>作品标题、说明和联系方式可在上线前继续细化。</p></div></div></section>
+<section class="commission reveal" id="commission"><div><h2 class="com-title">联系<br>岚烟<br><span>Faileas</span></h2><p class="com-sub">这里保留客户作品页、视频合集和外部平台入口。后续如果有新的主页链接，可以继续补充到这一栏。</p><div class="com-links"><a href="works.html">先查看作品视频 <span>→</span></a><a href="links.html">跳转视频合集 <span>→</span></a><a href="links.html#external-links">查看外部链接 <span>→</span></a></div></div><div class="com-panel"><div class="com-row"><p class="com-label">状态</p><p class="com-text">作品持续更新中</p></div><div class="com-row"><p class="com-label">内容</p><p class="com-text">个人作品 · 视频展示 · 外部平台链接</p></div><div class="com-row"><p class="com-label">更新</p><p class="com-text">后续可按新作品继续补充页面内容。</p></div><a class="btn" href="links.html#external-links">查看外部链接 →</a></div></section>
+<footer><span class="foot-logo">岚烟Faileas</span><span style="font-family:var(--fs);letter-spacing:.1em;">个人作品展示</span><span>© 2025</span></footer>
+<script>
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function ar(){rx=mx;ry=my;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();document.querySelectorAll('a,button,.work-card,.price,.rule').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.5)';ring.style.borderColor='rgba(155,31,31,.6)';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(155,31,31,.35)';});});const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.06});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+<script src="assets/js/vendor/live2dcubismcore.min.js?v=20260707-local"></script>
+<script src="assets/js/vendor/pixi-7.4.3.min.js?v=20260708-pixi7"></script>
+<script>
+window.process = window.process || { env: {} };
+window.process.env = window.process.env || {};
+window.process.env.NODE_ENV = window.process.env.NODE_ENV || 'production';
+</script>
+<script src="assets/js/vendor/pixi-live2d-display-0.5.0-beta-cubism4.min.js?v=20260708-live2d-beta"></script>
+<script src="assets/js/live2d-init.js?v=20260709-mouthfix4"></script>
+</body>
+</html>
