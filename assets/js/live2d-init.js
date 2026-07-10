@@ -145,6 +145,51 @@
     }
   }
 
+  function installDrag() {
+    let dragging = false;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
+
+    const moveTo = (left, top) => {
+      const maxLeft = window.innerWidth - root.offsetWidth;
+      const maxTop = window.innerHeight - root.offsetHeight;
+      root.style.left = `${Math.min(Math.max(0, left), maxLeft)}px`;
+      root.style.top = `${Math.min(Math.max(0, top), maxTop)}px`;
+      root.style.right = 'auto';
+      root.style.bottom = 'auto';
+    };
+
+    root.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      root.setPointerCapture?.(event.pointerId);
+      const rect = root.getBoundingClientRect();
+      startX = event.clientX;
+      startY = event.clientY;
+      startLeft = rect.left;
+      startTop = rect.top;
+    });
+
+    root.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      event.preventDefault();
+      moveTo(startLeft + event.clientX - startX, startTop + event.clientY - startY);
+      if (window.__live2dModel) fitModel(window.__live2dModel);
+    });
+
+    const stop = (event) => {
+      dragging = false;
+      root.releasePointerCapture?.(event.pointerId);
+    };
+    root.addEventListener('pointerup', stop);
+    root.addEventListener('pointercancel', stop);
+    window.addEventListener('resize', () => {
+      const rect = root.getBoundingClientRect();
+      moveTo(rect.left, rect.top);
+    });
+  }
+
   function assertBrowserMode() {
     if (window.location.protocol === 'file:') {
       throw new Error('请不要直接双击 index.html，请先运行 node server.js，再打开 http://127.0.0.1:8000/index.html');
@@ -276,6 +321,7 @@
     const model = await loadModel();
     window.__live2dApp = app;
     window.__live2dModel = model;
+    installDrag();
     installModelDefaults(model);
     app.stage.addChild(model);
     fitModel(model);
