@@ -4,17 +4,21 @@
 
   const canvas = root.querySelector('canvas');
   const status = root.querySelector('[data-live2d-status]');
-  const MODEL_PATH = 'assets/live2d/model/canned-god/model-lite.model3.json';
+  const MODEL_PATH = 'assets/live2d/model/canned-god/model.model3.json';
   const FALLBACK_MODEL_PATH = 'assets/live2d/model/canned-god/model-lite.model3.json';
   const RUNTIME_FALLBACK_SCRIPTS = [
     'assets/js/vendor/pixi-live2d-display-cubism4.min.js?v=20260708-runtime-fallback1',
     'assets/js/vendor/pixi-live2d-display.min.js?v=20260708-runtime-fallback1'
   ];
   const CUBISM_MEMORY_BYTES = 128 * 1024 * 1024;
+  const MAX_RENDER_RESOLUTION = 3;
+  const MASK_RENDER_TEXTURE_COUNT = 2;
   const HIDDEN_DRAWABLE_IDS = new Set(['ArtMesh312']);
-  const OFF_EXPRESSION_PARAMETERS = [
-    'Param33', 'Param34', 'Param46', 'Param51', 'Param52', 'Param53', 'Param62',
-    'Param65', 'Param66', 'Param67', 'Param69', 'Param71', 'Param72', 'Param73'
+  const MODEL_DEFAULT_PARAMETERS = [
+    ['Param33', 0], ['Param34', 0], ['Param46', 0], ['Param51', 0],
+    ['Param52', 0], ['Param53', 0], ['Param62', 0], ['Param65', 0],
+    ['Param66', 0], ['Param67', 0], ['Param69', 0], ['Param71', 0],
+    ['Param72', 0], ['Param73', 0], ['Param75', 1]
   ];
   const CLOSED_MOUTH_PARAMETERS = [
     ['ParamMouthForm', 0],
@@ -48,8 +52,8 @@
   }
 
   function fitModel(model) {
-    const width = app.renderer.width;
-    const height = app.renderer.height;
+    const width = app.screen.width;
+    const height = app.screen.height;
     const bounds = model.getLocalBounds();
     const modelWidth = bounds.width || model.internalModel?.width || 1400;
     const modelHeight = bounds.height || model.internalModel?.height || 1500;
@@ -59,6 +63,17 @@
     model.x = width * 0.5;
     model.y = height * 0.54;
     model.scale.set(scale);
+  }
+
+  function getRenderResolution() {
+    return Math.min(window.devicePixelRatio || 1, MAX_RENDER_RESOLUTION);
+  }
+
+  function syncRenderer(model) {
+    const resolution = getRenderResolution();
+    if (app.renderer.resolution !== resolution) app.renderer.resolution = resolution;
+    app.renderer.resize(root.clientWidth, root.clientHeight);
+    fitModel(model);
   }
 
   function getCubismId(id) {
@@ -89,8 +104,7 @@
   }
 
   function applyModelDefaults(model) {
-    for (const id of OFF_EXPRESSION_PARAMETERS) setModelParameter(model, id, 0);
-    setModelParameter(model, 'Param75', 1);
+    for (const [id, value] of MODEL_DEFAULT_PARAMETERS) setModelParameter(model, id, value);
     applyClosedMouth(model);
   }
 
@@ -113,34 +127,23 @@
     }
   }
 
+  function configureMaskRenderer(model) {
+    const internalModel = model.internalModel;
+    const renderer = internalModel?.renderer;
+    const coreModel = internalModel?.coreModel;
+    if (!renderer || !coreModel?.isUsingMasking?.()) return;
+
+    renderer._clippingManager?.release?.();
+    renderer.initialize(coreModel, MASK_RENDER_TEXTURE_COUNT);
+    renderer.setIsPremultipliedAlpha(true);
+  }
+
   function installModelDefaults(model) {
-    const enforce = () => {
-      applyModelDefaults(model);
-      hideModelDrawables(model);
-    };
+    applyModelDefaults(model);
+    hideModelDrawables(model);
 
-    enforce();
-    model.internalModel?.on?.('beforeModelUpdate', enforce);
-    model.internalModel?.on?.('afterModelUpdate', enforce);
-
-    if (model.internalModel && typeof model.internalModel.update === 'function' && !model.internalModel.__siteUpdatePatch) {
-      const update = model.internalModel.update.bind(model.internalModel);
-      model.internalModel.update = (...args) => {
-        const result = update(...args);
-        enforce();
-        return result;
-      };
-      model.internalModel.__siteUpdatePatch = true;
-    }
-
-    if (model.internalModel && typeof model.internalModel.draw === 'function' && !model.internalModel.__siteDrawablePatch) {
-      const draw = model.internalModel.draw.bind(model.internalModel);
-      model.internalModel.draw = (...args) => {
-        enforce();
-        return draw(...args);
-      };
-      model.internalModel.__siteDrawablePatch = true;
-    }
+    const internalModel = model.internalModel;
+    internalModel?.on?.('beforeModelUpdate', () => applyClosedMouth(model));
   }
 
   function installDrag() {
@@ -313,6 +316,8 @@
       autoStart: true,
       backgroundAlpha: 0,
       antialias: true,
+      autoDensity: true,
+      resolution: getRenderResolution(),
       resizeTo: root
     });
 
@@ -320,11 +325,14 @@
     window.__live2dApp = app;
     window.__live2dModel = model;
     installDrag();
+    configureMaskRenderer(model);
     installModelDefaults(model);
     app.stage.addChild(model);
     fitModel(model);
 
-    window.addEventListener('resize', () => fitModel(model));
+    const refit = () => requestAnimationFrame(() => syncRenderer(model));
+    window.addEventListener('resize', refit);
+    new ResizeObserver(refit).observe(root);
     setStatus('Live2D: finalizing');
     await waitForFrames(12);
     root.dataset.state = 'ready';

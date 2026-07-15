@@ -75,9 +75,9 @@ a{color:inherit;text-decoration:none;}
 .lc:hover .lc-bar{transform:scaleX(1);}
 
 /* 封面 */
-.lc-thumb{position:relative;overflow:hidden;min-height:620px;background:var(--paper3);}
-.lc-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);}
-.lc:hover .lc-thumb img{transform:scale(1.02);}
+.lc-thumb{position:relative;overflow:hidden;min-height:620px;background:#161310;}
+.lc-thumb img,.lc-thumb video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.lc:hover .lc-thumb img,.lc:hover .lc-thumb video{transform:scale(1.02);}
 .lc-thumb-placeholder{width:100%;height:100%;}
 .tp-a{background:linear-gradient(135deg,#DDD5C5,#C8BFB0);}
 .tp-b{background:linear-gradient(135deg,#C5CFDD,#B0BCC8);}
@@ -200,10 +200,77 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
 
 <div class="series-wrap">
 
-  <div class="series reveal" id="external-links">
+  <div class="series reveal">
     <div class="series-header">
       <div class="series-left">
         <span class="series-no">01</span>
+        <h2 class="series-name">岚烟Faileas</h2>
+        <span class="series-count">4 个视频</span>
+      </div>
+      <span class="series-tag">Portfolio</span>
+    </div>
+
+    <a class="lc reveal" href="assets/videos/lanyan-faileas-01.mp4">
+      <div class="lc-bar"></div>
+      <div class="lc-thumb">
+        <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 01 封面"><source src="assets/videos/lanyan-faileas-01.mp4#t=0.1" type="video/mp4"></video>
+        <span class="lc-platform">本地视频</span>
+        <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
+      </div>
+      <div class="lc-panel">
+        <p class="lc-tag">作品展示</p><h3 class="lc-name">岚烟Faileas · 作品展示 01</h3><p class="lc-meta">Video · 2026</p>
+        <div class="lc-comm"><div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div><div class="ci"><p class="ci-label">类型</p><p class="ci-val">个人作品展示</p></div><div class="ci"><p class="ci-label">文件</p><p class="ci-val">lanyan-faileas-01.mp4</p></div><div class="ci"><p class="ci-label">备注</p><p class="ci-val ci-note">封面取自本地视频实际画面，点击打开原视频。</p></div></div>
+        <div class="lc-footer"><span class="lc-platform-name">assets/videos</span><span class="lc-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="lc reveal d1" href="assets/videos/lanyan-faileas-02.mp4">
+      <div class="lc-bar"></div>
+      <div class="lc-thumb">
+        <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 02 封面"><source src="assets/videos/lanyan-faileas-02.mp4#t=0.1" type="video/mp4"></video>
+        <span class="lc-platform">本地视频</span>
+        <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
+      </div>
+      <div class="lc-panel">
+        <p class="lc-tag">作品展示</p><h3 class="lc-name">岚烟Faileas · 作品展示 02</h3><p class="lc-meta">Video · 2026</p>
+        <div class="lc-comm"><div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div><div class="ci"><p class="ci-label">类型</p><p class="ci-val">个人作品展示</p></div><div class="ci"><p class="ci-label">文件</p><p class="ci-val">lanyan-faileas-02.mp4</p></div><div class="ci"><p class="ci-label">备注</p><p class="ci-val ci-note">封面取自本地视频实际画面，点击打开原视频。</p></div></div>
+        <div class="lc-footer"><span class="lc-platform-name">assets/videos</span><span class="lc-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="lc reveal d2" href="assets/videos/lanyan-faileas-03.mp4">
+      <div class="lc-bar"></div>
+      <div class="lc-thumb">
+        <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 03 封面"><source src="assets/videos/lanyan-faileas-03.mp4#t=0.1" type="video/mp4"></video>
+        <span class="lc-platform">本地视频</span>
+        <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
+      </div>
+      <div class="lc-panel">
+        <p class="lc-tag">作品展示</p><h3 class="lc-name">岚烟Faileas · 作品展示 03</h3><p class="lc-meta">Video · 2026</p>
+        <div class="lc-comm"><div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div><div class="ci"><p class="ci-label">类型</p><p class="ci-val">个人作品展示</p></div><div class="ci"><p class="ci-label">文件</p><p class="ci-val">lanyan-faileas-03.mp4</p></div><div class="ci"><p class="ci-label">备注</p><p class="ci-val ci-note">封面取自本地视频实际画面，点击打开原视频。</p></div></div>
+        <div class="lc-footer"><span class="lc-platform-name">assets/videos</span><span class="lc-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="lc reveal d3" href="assets/videos/lanyan-faileas-04.mp4">
+      <div class="lc-bar"></div>
+      <div class="lc-thumb">
+        <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 04 封面"><source src="assets/videos/lanyan-faileas-04.mp4#t=0.1" type="video/mp4"></video>
+        <span class="lc-platform">本地视频</span>
+        <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
+      </div>
+      <div class="lc-panel">
+        <p class="lc-tag">作品展示</p><h3 class="lc-name">岚烟Faileas · 作品展示 04</h3><p class="lc-meta">Video · 2026</p>
+        <div class="lc-comm"><div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div><div class="ci"><p class="ci-label">类型</p><p class="ci-val">个人作品展示</p></div><div class="ci"><p class="ci-label">文件</p><p class="ci-val">lanyan-faileas-04.mp4</p></div><div class="ci"><p class="ci-label">备注</p><p class="ci-val ci-note">封面取自本地视频实际画面，点击打开原视频。</p></div></div>
+        <div class="lc-footer"><span class="lc-platform-name">assets/videos</span><span class="lc-arrow">→</span></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="series reveal" id="external-links">
+    <div class="series-header">
+      <div class="series-left">
+        <span class="series-no">02</span>
         <h2 class="series-name">外部平台链接</h2>
         <span class="series-count">2 个链接</span>
       </div>
@@ -213,13 +280,13 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
     <a class="lc reveal" href="https://www.bilibili.com/video/BV1LDfmYnEka/?spm_id_from=888.80997.embed_other.whitelist&t=52.432991&bvid=BV1LDfmYnEka" target="_blank" rel="noopener noreferrer">
       <div class="lc-bar"></div>
       <div class="lc-thumb">
-        <img src="assets/images/links/link-character-01.svg" alt="外部视频 01 封面">
+        <img src="assets/images/links/bilibili-BV1LDfmYnEka-cover.jpg" alt="《罐装神明》Live2D 模型展示封面">
         <span class="lc-platform">外部链接</span>
         <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
       </div>
       <div class="lc-panel">
         <p class="lc-tag">外部平台</p>
-        <h3 class="lc-name">岚烟Faileas · 外部视频 01</h3>
+        <h3 class="lc-name">Live2D 免费模型展示 · 罐装神明</h3>
         <p class="lc-meta">bilibili · external</p>
         <div class="lc-comm">
           <div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div>
@@ -237,13 +304,13 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
     <a class="lc reveal d1" href="https://www.bilibili.com/video/BV14B4AzMEWe/?spm_id_from=888.80997.embed_other.whitelist&t=67.25984&bvid=BV14B4AzMEWe" target="_blank" rel="noopener noreferrer">
       <div class="lc-bar"></div>
       <div class="lc-thumb">
-        <img src="assets/images/links/link-scene-01.svg" alt="外部视频 02 封面">
+        <img src="assets/images/links/bilibili-BV14B4AzMEWe-cover.jpg" alt="温柔猫猫 Live2D 模型展示封面">
         <span class="lc-platform">外部链接</span>
         <div class="lc-hover"><div class="lc-ext-icon">↗</div></div>
       </div>
       <div class="lc-panel">
         <p class="lc-tag">外部平台</p>
-        <h3 class="lc-name">岚烟Faileas · 外部视频 02</h3>
+        <h3 class="lc-name">Live2D 模型展示 · 温柔猫猫</h3>
         <p class="lc-meta">bilibili · external</p>
         <div class="lc-comm">
           <div class="ci"><p class="ci-label">创作者</p><p class="ci-val">岚烟Faileas</p></div>
@@ -278,6 +345,10 @@ document.querySelectorAll('a,button,.lc').forEach(el=>{
   el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(155,31,31,.35)';});
 });
 document.getElementById('totalCount').textContent=document.querySelectorAll('a.lc').length;
+document.querySelectorAll('video[data-preview-video]').forEach(video=>{
+  const showFrame=()=>{if(Number.isFinite(video.duration)&&video.duration>0)video.currentTime=Math.min(.1,video.duration/2);};
+  if(video.readyState>=1)showFrame();else video.addEventListener('loadedmetadata',showFrame,{once:true});
+});
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.05});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
