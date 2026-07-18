@@ -12,6 +12,8 @@
 #cur{display:none;position:fixed;pointer-events:none;z-index:9999;}#cur-dot{width:7px;height:7px;background:var(--zhu);border-radius:50%;transform:translate(-50%,-50%);position:fixed;}#cur-ring{width:34px;height:34px;border:1.5px solid rgba(155,31,31,.35);border-radius:50%;position:fixed;transform:translate(-50%,-50%);transition:all .18s ease;}
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 52px;height:62px;background:rgba(253,250,244,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(155,31,31,.08);}.nav-logo{font-family:var(--fs);font-size:15px;letter-spacing:.18em;display:flex;align-items:center;gap:10px;}.logo-seal{width:26px;height:26px;border:1.5px solid var(--zhu);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--zhu);}.nav-links{display:flex;gap:32px;list-style:none;}.nav-links a{font-size:12px;letter-spacing:.1em;color:var(--muted);transition:color .2s;position:relative;}.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--zhu);transition:width .28s;}.nav-links a:hover,.nav-links a.active{color:var(--zhu);}.nav-links a.active::after,.nav-links a:hover::after{width:100%;}.nav-cta{justify-self:end;font-size:11px;letter-spacing:.12em;padding:7px 18px;border:1.5px solid rgba(26,20,16,.18);color:var(--muted);cursor:auto;transition:all .22s;}.nav-cta:hover{border-color:var(--zhu);color:var(--zhu);}
 .hero{min-height:100svh;padding:92px 30px 32px;display:grid;grid-template-columns:minmax(0,430px);gap:34px;border-bottom:1px solid rgba(26,20,16,.08);}.hero-info{display:flex;flex-direction:column;justify-content:center;padding-left:22px;}.hero-kicker{font-size:9px;letter-spacing:.2em;color:var(--zhu);margin-bottom:18px;display:flex;gap:10px;align-items:center;}.hero-kicker::before{content:'';width:28px;height:1px;background:var(--zhu);}.hero-brand{font-family:var(--fs);font-size:44px;font-weight:900;letter-spacing:.08em;line-height:1.05;margin-bottom:10px;}.hero-meta{font-size:10px;letter-spacing:.18em;color:var(--faint);margin-bottom:28px;}.hero-copy{font-size:13px;line-height:2;color:var(--muted);font-weight:300;margin-bottom:26px;}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px;}.hero-tags span{font-size:9px;letter-spacing:.12em;color:var(--zhu);border:1px solid rgba(155,31,31,.14);padding:5px 10px;background:rgba(155,31,31,.025);}.hero-list{margin-top:auto;border-top:1px solid rgba(26,20,16,.08);}.hero-list a{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(26,20,16,.08);font-size:12px;color:var(--muted);letter-spacing:.06em;transition:color .2s;}.hero-list a:hover{color:var(--zhu);}.live2d-widget{position:fixed;right:18px;bottom:18px;width:min(32vw,320px);height:min(48vh,460px);min-width:210px;min-height:300px;z-index:180;background:transparent;border:0;box-shadow:none;overflow:hidden;touch-action:none;user-select:none;cursor:grab;}.live2d-widget:active{cursor:grabbing;}.live2d-widget canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;opacity:0;transition:opacity .35s ease;}.live2d-widget[data-state="ready"] canvas{opacity:1;}.live2d-status{position:absolute;left:50%;bottom:12px;z-index:3;transform:translateX(-50%);padding:6px 10px;background:rgba(253,250,244,.86);border:1px solid rgba(155,31,31,.12);color:var(--muted);font-size:10px;letter-spacing:.08em;text-align:center;white-space:nowrap;}
+.hero{grid-template-columns:minmax(0,430px) minmax(0,1fr);align-items:center;gap:48px;padding-right:52px;}.hero-gallery{position:relative;align-self:stretch;min-height:calc(100svh - 124px);display:flex;align-items:center;justify-content:center;overflow:hidden;border-left:1px solid rgba(26,20,16,.07);background:linear-gradient(90deg,rgba(245,240,229,.28),rgba(253,250,244,0));}.hero-gallery-track{position:relative;width:100%;height:100%;min-height:620px;}.hero-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}.hero-slide.is-active{opacity:1;transform:translateY(0);}.hero-slide img{width:100%;height:100%;max-height:76svh;object-fit:contain;display:block;filter:drop-shadow(0 22px 38px rgba(26,20,16,.12));}.hero-gallery-ui{position:absolute;left:28px;right:28px;bottom:28px;display:flex;align-items:center;justify-content:space-between;z-index:3;}.hero-gallery-count{font-family:var(--fs);font-size:15px;color:var(--zhu);letter-spacing:.08em;}.hero-gallery-controls{display:flex;align-items:center;gap:8px;}.hero-gallery-btn{width:34px;height:34px;border:1px solid rgba(26,20,16,.15);background:rgba(253,250,244,.78);color:var(--zhu);font-size:16px;line-height:1;cursor:pointer;transition:all .22s;}.hero-gallery-btn:hover{border-color:var(--zhu);background:var(--paper);}.hero-gallery-dots{display:flex;gap:6px;}.hero-gallery-dot{width:6px;height:6px;border:0;border-radius:50%;background:rgba(26,20,16,.18);padding:0;cursor:pointer;}.hero-gallery-dot.is-active{background:var(--zhu);}
+.live2d-status{max-width:calc(100% - 32px);white-space:normal;line-height:1.5;}
 .section{padding:64px 52px;border-bottom:1px solid rgba(26,20,16,.08);}.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;}.eyebrow{font-size:9px;letter-spacing:.2em;color:var(--zhu);margin-bottom:10px;}.sec-title{font-family:var(--fs);font-size:28px;font-weight:900;letter-spacing:.08em;}.sec-copy{max-width:360px;font-size:11px;line-height:1.8;color:var(--muted);text-align:right;}
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}.work-card{background:var(--paper2);min-height:360px;display:flex;flex-direction:column;transition:.28s;}.work-card:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(26,20,16,.08);}.work-thumb{height:210px;background:#161310;overflow:hidden;}.work-thumb img,.work-thumb video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform .5s cubic-bezier(.16,1,.3,1);}.work-card:hover .work-thumb img,.work-card:hover .work-thumb video{transform:scale(1.03);}.w1{background:linear-gradient(135deg,#DDD5C5,#C8BFB0);}.w2{background:linear-gradient(135deg,#C5CFDD,#B0BCC8);}.w3{background:linear-gradient(135deg,#D5D0C5,#C8C0B0);}.work-body{padding:20px;border-top:1px solid rgba(26,20,16,.05);}.work-tag{font-size:9px;letter-spacing:.14em;color:var(--gold);margin-bottom:8px;}.work-name{font-family:var(--fs);font-size:18px;font-weight:600;margin-bottom:10px;}.work-meta{font-size:11px;color:var(--faint);line-height:1.8;}.work-line{margin-top:18px;padding-top:14px;border-top:1px solid rgba(26,20,16,.07);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;}
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(26,20,16,.07);}.price{min-height:200px;padding:28px;border-right:1px solid rgba(26,20,16,.07);background:rgba(245,240,229,.72);}.price:last-child{border-right:0;}.price-icon{font-family:var(--fs);font-size:30px;color:rgba(155,31,31,.12);margin-bottom:14px;}.price h3{font-size:14px;margin-bottom:10px;}.money{font-family:var(--fs);font-size:18px;color:var(--zhu);font-weight:900;margin-bottom:16px;}.price ul{list-style:none;font-size:11px;line-height:2;color:var(--muted);}.price li::before{content:'— ';color:var(--gold);}
@@ -66,6 +68,8 @@
     .section,.commission{padding-left:12px;padding-right:12px;}
   .hero-brand{font-size:30px;}
 }
+@media(max-width:900px){.hero-gallery{align-self:auto;min-height:52vh;border-left:0;border-top:1px solid rgba(26,20,16,.07);}.hero-gallery-track{min-height:52vh;}.hero-slide img{max-height:52vh;}.hero-gallery-ui{left:18px;right:18px;bottom:18px;}}
+@media(max-width:640px){.hero-gallery{width:100%;min-height:46vh;}.hero-gallery-track{min-height:46vh;}.hero-slide img{max-height:44vh;}.hero-gallery-ui{left:12px;right:12px;bottom:12px;}.hero-gallery-btn{width:32px;height:32px;}.hero-gallery-count{font-size:13px;}.hero-gallery-controls{gap:7px;}}
 </style>
 </head>
 <body>
@@ -73,6 +77,25 @@
 <nav class="nav"><div class="nav-logo"><div class="logo-seal">岚</div>岚烟Faileas</div><ul class="nav-links"><li><a href="index.html" class="active">首页</a></li><li><a href="works.html">作品视频</a></li><li><a href="links.html">视频合集</a></li><li><a href="#commission">联系</a></li></ul><a href="#commission" class="nav-cta">联系入口</a></nav>
 <header class="hero">
   <aside class="hero-info reveal"><p class="hero-kicker">岚烟Faileas · Portfolio</p><h1 class="hero-brand">岚烟Faileas</h1><p class="hero-meta">个人作品展示 · 视频档案</p><p class="hero-copy">这里收纳岚烟Faileas的个人作品视频、展示片段与后续更新内容。访问者可以快速查看作品页，也可以在视频合集里直接打开完整视频。</p><div class="hero-tags"><span>Portfolio</span><span>Artwork</span><span>Video</span><span>Archive</span></div><div class="hero-list"><a href="works.html">精选作品 <span>→</span></a><a href="links.html">视频合集 <span>→</span></a><a href="#commission">联系信息 <span>→</span></a></div></aside>
+  <div class="hero-gallery reveal" data-hero-gallery>
+    <div class="hero-gallery-track">
+      <div class="hero-slide is-active"><img src="assets/images/07c8ca292ad4af52786021ccfab710f4.jpg" alt="岚烟Faileas 图片展示 01" loading="eager" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/0b42a29a1da996c791ee733d82247daa.png" alt="岚烟Faileas 图片展示 02" loading="lazy" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/40753508dfd58585e6ca9900ea005e63.png" alt="岚烟Faileas 图片展示 03" loading="lazy" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/46d4f37193ac829c36463249ebb74dfc.jpg" alt="岚烟Faileas 图片展示 04" loading="lazy" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/6a01e55e9039267d2866c2b56d224aa0.jpg" alt="岚烟Faileas 图片展示 05" loading="lazy" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/a2c46f593617849d4cc1f8aada140650.png" alt="岚烟Faileas 图片展示 06" loading="lazy" decoding="async"></div>
+      <div class="hero-slide"><img data-src="assets/images/c6cc126ffdbb8caa1200be77b2febd79.jpg" alt="岚烟Faileas 图片展示 07" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="hero-gallery-ui">
+      <span class="hero-gallery-count" data-hero-gallery-count>01 / 07</span>
+      <div class="hero-gallery-controls">
+        <button class="hero-gallery-btn" type="button" data-hero-gallery-prev aria-label="上一张">‹</button>
+        <div class="hero-gallery-dots" data-hero-gallery-dots></div>
+        <button class="hero-gallery-btn" type="button" data-hero-gallery-next aria-label="下一张">›</button>
+      </div>
+    </div>
+  </div>
 </header>
 <div class="live2d-widget" data-live2d-root aria-label="罐装神明 Live2D 模型展示"><canvas aria-hidden="true"></canvas><p class="live2d-status" data-live2d-status>Live2D 脚本启动中</p></div>
 <section class="section reveal">
@@ -89,6 +112,66 @@
 <footer><span class="foot-logo">岚烟Faileas</span><span style="font-family:var(--fs);letter-spacing:.1em;">个人作品展示</span><span>© 2025</span></footer>
 <script>
 const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function ar(){rx=mx;ry=my;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();document.querySelectorAll('a,button,.work-card,.price,.rule').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.5)';ring.style.borderColor='rgba(155,31,31,.6)';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(155,31,31,.35)';});});const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.06});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+<script>
+(() => {
+  const gallery = document.querySelector('[data-hero-gallery]');
+  if (!gallery) return;
+
+  const slides = Array.from(gallery.querySelectorAll('.hero-slide'));
+  const count = gallery.querySelector('[data-hero-gallery-count]');
+  const dotsRoot = gallery.querySelector('[data-hero-gallery-dots]');
+  const prev = gallery.querySelector('[data-hero-gallery-prev]');
+  const next = gallery.querySelector('[data-hero-gallery-next]');
+  let active = 0;
+  let timer = 0;
+
+  const dots = slides.map((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = `hero-gallery-dot${index === 0 ? ' is-active' : ''}`;
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `第 ${index + 1} 张`);
+    dot.addEventListener('click', () => goTo(index));
+    dotsRoot.appendChild(dot);
+    return dot;
+  });
+
+  function render() {
+    ensureSlideImage(active);
+    ensureSlideImage((active + 1) % slides.length);
+    slides.forEach((slide, index) => slide.classList.toggle('is-active', index === active));
+    dots.forEach((dot, index) => dot.classList.toggle('is-active', index === active));
+    if (count) count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+  }
+
+  function ensureSlideImage(index) {
+    const img = slides[index]?.querySelector('img[data-src]');
+    if (!img) return;
+    img.src = img.dataset.src;
+    img.removeAttribute('data-src');
+  }
+
+  function goTo(index) {
+    active = (index + slides.length) % slides.length;
+    render();
+    restart();
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      active = (active + 1) % slides.length;
+      render();
+    }, 4500);
+  }
+
+  prev?.addEventListener('click', () => goTo(active - 1));
+  next?.addEventListener('click', () => goTo(active + 1));
+  gallery.addEventListener('mouseenter', () => clearInterval(timer));
+  gallery.addEventListener('mouseleave', restart);
+  render();
+  restart();
+})();
 </script>
 <script src="assets/js/vendor/live2dcubismcore.min.js?v=20260707-local"></script>
 <script src="assets/js/vendor/pixi-7.4.3.min.js?v=20260708-pixi7"></script>
