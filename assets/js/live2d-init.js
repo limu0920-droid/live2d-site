@@ -9,8 +9,8 @@
   const RAW_MODEL_PATH = 'https://raw.githubusercontent.com/limu0920-droid/live2d-site/main/assets/live2d/model/canned-god/model.model3.json';
   const RAW_FALLBACK_MODEL_PATH = 'https://raw.githubusercontent.com/limu0920-droid/live2d-site/main/assets/live2d/model/canned-god/model-lite.model3.json';
   const MODEL_SOURCES = [
-    ['GitHub Pages', MODEL_PATH, FALLBACK_MODEL_PATH],
-    ['GitHub raw', RAW_MODEL_PATH, RAW_FALLBACK_MODEL_PATH]
+    ['GitHub Pages', MODEL_PATH, FALLBACK_MODEL_PATH, 6500],
+    ['GitHub raw', RAW_MODEL_PATH, RAW_FALLBACK_MODEL_PATH, 26000]
   ];
   const MODEL_OPTIONS = {
     autoHitTest: true,
@@ -21,6 +21,7 @@
     'assets/js/vendor/pixi-live2d-display.min.js?v=20260708-runtime-fallback1'
   ];
   const CUBISM_MEMORY_BYTES = 128 * 1024 * 1024;
+  const LIVE2D_GLOBAL_TIMEOUT_MS = 45000;
   const MAX_RENDER_RESOLUTION = 3;
   const MASK_RENDER_TEXTURE_COUNT = 2;
   const HIDDEN_DRAWABLE_IDS = new Set(['ArtMesh312']);
@@ -59,6 +60,21 @@
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function timeoutError(label, ms) {
+    const error = new Error(`${label} timed out after ${ms}ms`);
+    error.name = 'TimeoutError';
+    return error;
+  }
+
+  function withTimeout(promise, ms, label) {
+    let timeoutId = 0;
+    const timeout = new Promise((_, reject) => {
+      timeoutId = setTimeout(() => reject(timeoutError(label, ms)), ms);
+    });
+
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timeoutId));
   }
 
   function fitModel(model) {
@@ -302,17 +318,30 @@
     const Live2DModel = window.PIXI.live2d.Live2DModel;
     let lastError = null;
 
-    for (const [sourceName, fullPath, litePath] of MODEL_SOURCES) {
+    for (const [sourceName, fullPath, litePath, timeoutMs] of MODEL_SOURCES) {
       try {
         setStatus(`Live2D: loading model from ${sourceName}`);
-        return await Live2DModel.from(fullPath, { ...MODEL_OPTIONS });
+        return await withTimeout(
+          Live2DModel.from(fullPath, { ...MODEL_OPTIONS }),
+          timeoutMs,
+          `${sourceName} full model`
+        );
       } catch (error) {
         lastError = error;
         console.warn(`Live2D full model load failed from ${sourceName}, retrying without physics:`, error);
+        if (error.name === 'TimeoutError') {
+          setStatus(`Live2D: ${sourceName} timed out, trying next source`);
+          continue;
+        }
+
         setStatus(`Live2D: retrying ${sourceName} without physics (${formatError(error)})`);
 
         try {
-          return await Live2DModel.from(litePath, { ...MODEL_OPTIONS });
+          return await withTimeout(
+            Live2DModel.from(litePath, { ...MODEL_OPTIONS }),
+            timeoutMs,
+            `${sourceName} lite model`
+          );
         } catch (fallbackError) {
           lastError = fallbackError;
           console.warn(`Live2D lite model load failed from ${sourceName}:`, fallbackError);
@@ -361,7 +390,7 @@
     if (settled) return;
     setStatus('Live2D: loading timeout');
     root.dataset.state = 'timeout';
-  }, 20000);
+  }, LIVE2D_GLOBAL_TIMEOUT_MS);
 
   main()
     .then(() => {

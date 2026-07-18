@@ -1,6 +1,7 @@
 (() => {
   const RAW_BASE = 'https://raw.githubusercontent.com/limu0920-droid/live2d-site/main/';
   const VIDEO_PATH_MARKER = '/assets/videos/';
+  const METADATA_TIMEOUT_MS = 3500;
 
   function toRawVideoUrl(value, includeHash = true) {
     if (!value) return '';
@@ -39,8 +40,10 @@
     const { source, src } = getVideoSource(video);
     const rawUrl = toRawVideoUrl(src, true);
     if (rawUrl) video.dataset.rawFallbackSrc = rawUrl;
+    let metadataTimer = null;
 
     const showFrame = () => {
+      if (metadataTimer) clearTimeout(metadataTimer);
       if (Number.isFinite(video.duration) && video.duration > 0) {
         video.currentTime = Math.min(0.1, video.duration / 2);
       }
@@ -51,7 +54,14 @@
 
     if (!rawUrl) return;
 
-    const onError = () => swapToRawSource(video, rawUrl);
+    metadataTimer = setTimeout(() => {
+      if (video.readyState < 1) swapToRawSource(video, rawUrl);
+    }, METADATA_TIMEOUT_MS);
+
+    const onError = () => {
+      if (metadataTimer) clearTimeout(metadataTimer);
+      swapToRawSource(video, rawUrl);
+    };
     video.addEventListener('error', onError);
     source?.addEventListener('error', onError);
   }
