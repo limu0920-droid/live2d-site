@@ -6,6 +6,16 @@
   const status = root.querySelector('[data-live2d-status]');
   const MODEL_PATH = 'assets/live2d/model/canned-god/model.model3.json';
   const FALLBACK_MODEL_PATH = 'assets/live2d/model/canned-god/model-lite.model3.json';
+  const RAW_MODEL_PATH = 'https://raw.githubusercontent.com/limu0920-droid/live2d-site/main/assets/live2d/model/canned-god/model.model3.json';
+  const RAW_FALLBACK_MODEL_PATH = 'https://raw.githubusercontent.com/limu0920-droid/live2d-site/main/assets/live2d/model/canned-god/model-lite.model3.json';
+  const MODEL_SOURCES = [
+    ['GitHub Pages', MODEL_PATH, FALLBACK_MODEL_PATH],
+    ['GitHub raw', RAW_MODEL_PATH, RAW_FALLBACK_MODEL_PATH]
+  ];
+  const MODEL_OPTIONS = {
+    autoHitTest: true,
+    autoFocus: true
+  };
   const RUNTIME_FALLBACK_SCRIPTS = [
     'assets/js/vendor/pixi-live2d-display-cubism4.min.js?v=20260708-runtime-fallback1',
     'assets/js/vendor/pixi-live2d-display.min.js?v=20260708-runtime-fallback1'
@@ -290,19 +300,27 @@
   async function loadModel() {
     setStatus('Live2D: loading model');
     const Live2DModel = window.PIXI.live2d.Live2DModel;
+    let lastError = null;
 
-    try {
-      return await Live2DModel.from(MODEL_PATH, {
-        autoInteract: true
-      });
-    } catch (error) {
-      console.warn('Live2D full model load failed, retrying without physics:', error);
-      setStatus(`Live2D: retrying without physics (${formatError(error)})`);
+    for (const [sourceName, fullPath, litePath] of MODEL_SOURCES) {
+      try {
+        setStatus(`Live2D: loading model from ${sourceName}`);
+        return await Live2DModel.from(fullPath, { ...MODEL_OPTIONS });
+      } catch (error) {
+        lastError = error;
+        console.warn(`Live2D full model load failed from ${sourceName}, retrying without physics:`, error);
+        setStatus(`Live2D: retrying ${sourceName} without physics (${formatError(error)})`);
 
-      return Live2DModel.from(FALLBACK_MODEL_PATH, {
-        autoInteract: true
-      });
+        try {
+          return await Live2DModel.from(litePath, { ...MODEL_OPTIONS });
+        } catch (fallbackError) {
+          lastError = fallbackError;
+          console.warn(`Live2D lite model load failed from ${sourceName}:`, fallbackError);
+        }
+      }
     }
+
+    throw lastError || new Error('Texture loading error');
   }
 
   async function main() {

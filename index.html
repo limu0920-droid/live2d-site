@@ -78,9 +78,9 @@
 <section class="section reveal">
   <div class="sec-head"><div><p class="eyebrow">00 · 作品示例</p><h2 class="sec-title">最近展示</h2></div><p class="sec-copy">精选本地视频入口，封面直接显示对应视频画面。</p></div>
   <div class="works-grid">
-    <a class="work-card" href="works.html"><div class="work-thumb w1"><video preload="auto" muted playsinline data-preview-video aria-label="作品展示 01 封面"><source src="assets/videos/lanyan-faileas-01.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 01</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a>
-    <a class="work-card" href="works.html"><div class="work-thumb w2"><video preload="auto" muted playsinline data-preview-video aria-label="作品展示 02 封面"><source src="assets/videos/lanyan-faileas-02.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 02</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a>
-    <a class="work-card" href="links.html"><div class="work-thumb w3"><video preload="auto" muted playsinline data-preview-video aria-label="视频合集封面"><source src="assets/videos/lanyan-faileas-03.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">视频合集</p><h3 class="work-name">岚烟Faileas · 视频合集</h3><p class="work-meta">Local video · archive</p><div class="work-line"><span>查看合集</span><span>→</span></div></div></a>
+    <a class="work-card" href="works.html"><div class="work-thumb w1"><video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 01 封面"><source src="assets/videos/lanyan-faileas-01.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 01</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a>
+    <a class="work-card" href="works.html"><div class="work-thumb w2"><video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 02 封面"><source src="assets/videos/lanyan-faileas-02.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">作品展示</p><h3 class="work-name">岚烟Faileas · 作品展示 02</h3><p class="work-meta">Video · 2026</p><div class="work-line"><span>查看作品</span><span>→</span></div></div></a>
+    <a class="work-card" href="links.html"><div class="work-thumb w3"><video preload="metadata" muted playsinline data-preview-video aria-label="视频合集封面"><source src="assets/videos/lanyan-faileas-03.mp4#t=0.1" type="video/mp4"></video></div><div class="work-body"><p class="work-tag">视频合集</p><h3 class="work-name">岚烟Faileas · 视频合集</h3><p class="work-meta">Local video · archive</p><div class="work-line"><span>查看合集</span><span>→</span></div></div></a>
   </div>
 </section>
 <section class="section reveal" id="service"><div class="sec-head"><div><p class="eyebrow">01 · 展示内容</p><h2 class="sec-title">展示内容</h2></div><p class="sec-copy">用于介绍作品类型和内容方向，可按客户资料继续补充。</p></div><div class="price-grid"><div class="price"><p class="price-icon">壹</p><h3>作品视频</h3><p class="money">Video</p><ul><li>外部链接播放</li><li>作品页封面展示</li><li>合集页外链入口</li></ul></div><div class="price"><p class="price-icon">贰</p><h3>作品档案</h3><p class="money">Archive</p><ul><li>按作品顺序整理</li><li>保留标题与说明</li><li>后续可继续追加</li></ul></div><div class="price"><p class="price-icon">叁</p><h3>个人主页</h3><p class="money">Profile</p><ul><li>展示客户名称</li><li>统一视觉风格</li><li>承接作品入口</li></ul></div><div class="price"><p class="price-icon">肆</p><h3>联系方式</h3><p class="money">Contact</p><ul><li>可放社交主页</li><li>可放邮箱或平台链接</li><li>上线前按真实信息替换</li></ul></div></div></section>
@@ -98,12 +98,13 @@ window.process.env = window.process.env || {};
 window.process.env.NODE_ENV = window.process.env.NODE_ENV || 'production';
 </script>
 <script src="assets/js/vendor/pixi-live2d-display-0.5.0-beta-cubism4.min.js?v=20260708-live2d-beta"></script>
+<script src="assets/js/media-fallback.js?v=20260718-media-fallback1"></script>
 <script>
 document.querySelectorAll('video[data-preview-video]').forEach(video=>{
   const showFrame=()=>{if(Number.isFinite(video.duration)&&video.duration>0)video.currentTime=Math.min(.1,video.duration/2);};
   if(video.readyState>=1)showFrame();else video.addEventListener('loadedmetadata',showFrame,{once:true});
 });
 </script>
-<script src="assets/js/live2d-init.js?v=20260715-mask-capacity3"></script>
+<script src="assets/js/live2d-init.js?v=20260716-raw-fallback1"></script>
 </body>
 </html>

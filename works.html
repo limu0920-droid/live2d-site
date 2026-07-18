@@ -221,7 +221,7 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
   <div class="vc reveal" data-category="showcase">
     <div class="vc-bar"></div>
     <div class="vc-media">
-      <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 01 封面">
+      <video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 01 封面">
         <source src="assets/videos/lanyan-faileas-01.mp4#t=0.1" type="video/mp4">
       </video>
       <div class="vc-overlay">
@@ -245,7 +245,7 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
   <div class="vc reveal d1" data-category="showcase">
     <div class="vc-bar"></div>
     <div class="vc-media">
-      <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 02 封面">
+      <video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 02 封面">
         <source src="assets/videos/lanyan-faileas-02.mp4#t=0.1" type="video/mp4">
       </video>
       <div class="vc-overlay">
@@ -269,7 +269,7 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
   <div class="vc reveal d2" data-category="showcase">
     <div class="vc-bar"></div>
     <div class="vc-media">
-      <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 03 封面">
+      <video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 03 封面">
         <source src="assets/videos/lanyan-faileas-03.mp4#t=0.1" type="video/mp4">
       </video>
       <div class="vc-overlay">
@@ -293,7 +293,7 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
   <div class="vc reveal d3" data-category="showcase">
     <div class="vc-bar"></div>
     <div class="vc-media">
-      <video preload="auto" muted playsinline data-preview-video aria-label="作品展示 04 封面">
+      <video preload="metadata" muted playsinline data-preview-video aria-label="作品展示 04 封面">
         <source src="assets/videos/lanyan-faileas-04.mp4#t=0.1" type="video/mp4">
       </video>
       <div class="vc-overlay">
@@ -333,6 +333,7 @@ footer{border-top:1px solid rgba(26,20,16,.08);display:flex;align-items:center;j
   <span>© 2025</span>
 </footer>
 
+<script src="assets/js/media-fallback.js?v=20260718-media-fallback1"></script>
 <script>
 const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
@@ -377,7 +378,7 @@ document.querySelectorAll('.vc').forEach(vc=>{
     const src=vid.querySelector('source')?.src||vid.src;
     if(!src||src===window.location.href)return; // 没有真实视频就不打开弹窗
     const cleanSrc=new URL(src,window.location.href);cleanSrc.hash='';
-    modalVid.src=cleanSrc.href;
+    modalVid.src=window.getPortfolioVideoUrl ? window.getPortfolioVideoUrl(cleanSrc.href) : cleanSrc.href;
     modalName.textContent=vc.querySelector('.vc-name')?.textContent||'';
     modalMeta.textContent=vc.querySelector('.vc-meta')?.textContent||'';
     modal.classList.add('open');
